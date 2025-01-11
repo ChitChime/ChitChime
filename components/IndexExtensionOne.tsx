@@ -11,6 +11,14 @@ const SpotlightWrapper = styled.section`
   background-color: ${colors.text};
   padding: 100px 150px;
   font-family: 'Kodchasan', sans-serif;
+
+  @media (max-width: 1300px) {
+    padding: 100px 100px; /* Update padding */
+  }
+
+  @media (max-width: 1100px) {
+    padding: 100px 60px; /* Add padding */
+  }
 `;
 
 const CardGrid = styled.div`
@@ -18,6 +26,18 @@ const CardGrid = styled.div`
   grid-template-columns: repeat(2, 1fr);
   gap: 20px;
   width: 55%;
+
+  @media (max-width: 1200px) {
+    width: 50%; /* Update width */
+  }
+
+  @media (max-width: 1050px) {
+    gap: 13px; /* Update gap */
+  }
+
+  @media (max-width: 1000px) {
+    gap: 10px; /* Update gap */
+  }
 `;
 
 const Card = styled.div`
@@ -49,6 +69,10 @@ const Card = styled.div`
 
   &:hover img {
     filter: brightness(0.5);
+
+    @media (max-width: 1000px) {
+      filter: none; /* Remove background color change */
+    }
   }
 
   .text-wrapper {
@@ -61,22 +85,63 @@ const Card = styled.div`
     text-align: left;
     transition: bottom 0.3s ease, background-color 0.3s ease;
 
+    @media (max-width: 1000px) {
+      transition: background-color 0.3s ease; /* Remove transform animation */
+    }
+
     h3 {
       font-size: 1rem;
       margin: 0 0 15px 0;
       color: ${colors.text};
+
+      @media (max-width: 1200px) {
+        margin: 0 0 22px 0; /* Add margin */
+      }
+
+      @media (max-width: 1000px) {
+        margin: 0 0 50px 0 !important; /* Update margin */
+      }
     }
 
     p {
       font-size: 0.9rem;
       margin: 0;
       color: ${colors.text};
+      transition: none; /* Remove animation */
     }
   }
 
   &:hover .text-wrapper {
     bottom: 0;
     background-color: rgba(${parseInt(colors.backgroundBottom.slice(1, 3), 16)}, ${parseInt(colors.backgroundBottom.slice(3, 5), 16)}, ${parseInt(colors.backgroundBottom.slice(5, 7), 16)}, 0.95);
+
+    @media (max-width: 1000px) {
+      bottom: -45px; /* Keep background position */
+    }
+  }
+
+  @media (max-width: 1200px) {
+    h3 {
+      font-size: 0.9rem; /* Update font size */
+    }
+
+    p {
+      font-size: 0.8rem; /* Update font size */
+    }
+    .text-wrapper h3 {
+      font-size: 0.9rem; /* Update font size */
+      margin: 0 0 22px 0; /* Add margin */
+    }
+
+    .text-wrapper p {
+      font-size: 0.7rem; /* Update font size */
+    }
+  }
+
+  @media (max-width: 1000px) {
+    .text-wrapper p {
+      display: none; /* Remove paragraph */
+    }
   }
 `;
 
@@ -156,6 +221,33 @@ const DescriptionWrapper = styled.div`
       );
       color: ${colors.text};
       transform: scale(1.05);
+    }
+  }
+
+  @media (max-width: 1200px) {
+    width: 45%; /* Update width */
+
+    h2 {
+      margin-top: 0; /* Update margin */
+    }
+
+    button {
+      font-size: 0.9rem; /* Update font size */
+    }
+  }
+
+  @media (max-width: 1000px) {
+    h2 {
+      font-size: 3rem; /* Update font size */
+    }
+
+    p {
+      font-size: 0.9rem; /* Update font size */
+      margin-top: 0px; /* Add margin-top */
+    }
+
+    button {
+      font-size: 0.8rem; /* Update font size */
     }
   }
 `;
