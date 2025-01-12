@@ -8,6 +8,7 @@ import IndexExtensionOne from "../components/IndexExtensionOne";
 import IndexExtensionTwo from "../components/IndexExtensionTwo";
 import IndexExtensionThree from "../components/IndexExtensionThree";
 import LoadingComponent from "../components/LoadingComponent"; // ایمپورت کامپوننت لودینگ
+import Image from 'next/image'; // Import Next.js Image component
 
 /* انیمیشن گرادینت برای عنوان */
 const gradientAnimation = keyframes`
@@ -757,7 +758,7 @@ export default function Home() {
       <Head>
         <link
           rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=chevron_right"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=chevron_right&display=optional"
         />
       </Head>
       <GlobalStyle />
@@ -771,7 +772,7 @@ export default function Home() {
         <LeftCircle />
         <Header>
           <LogoButton>
-            <img src="/assets/ChitChime-Logo.webp" alt="ChitChime Logo" />
+            <Image src="/assets/ChitChime-Logo.webp" alt="ChitChime Logo" width={150} height={110} />
           </LogoButton>
           <HamburgerMenu className={menuOpen ? 'open' : ''} onClick={toggleMenu}>
             <div></div>
