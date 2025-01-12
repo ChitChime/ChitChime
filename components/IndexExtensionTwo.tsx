@@ -13,6 +13,26 @@ const Container = styled.div`
   font-family: 'Kodchasan', sans-serif;
   margin-bottom: 200px;
 
+  @media (max-width: 1300px) {
+    padding: 50px 100px;
+  }
+
+  @media (max-width: 1100px) {
+    padding: 50px 60px;
+  }
+
+  @media (max-width: 900px) {
+    margin-bottom: 100px;
+  }
+
+  @media (max-width: 600px) {
+    margin-bottom: 50px;
+  }
+
+  @media (max-width: 450px) {
+    padding: 50px 30px;
+  }
+
   .scroll-element {
     opacity: 0;
     transform: translateY(50px);
@@ -31,6 +51,10 @@ const Header = styled.div`
   align-items: center;
   width: 100%;
   margin-bottom: 20px;
+
+  @media (max-width: 700px) {
+    justify-content: center;
+  }
 `;
 
 const Title = styled.h1`
@@ -45,6 +69,10 @@ const Title = styled.h1`
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   margin: 0;
+
+  @media (max-width: 1000px) {
+    font-size: 2.7rem;
+  }
 `;
 
 const Leaderboard = styled.div`
@@ -52,6 +80,14 @@ const Leaderboard = styled.div`
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
   width: 100%;
+
+  @media (max-width: 900px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: 700px) {
+    grid-template-columns: repeat(1, 1fr);
+  }
 `;
 
 const LeaderboardButtonWrapper = styled.div`
@@ -97,6 +133,10 @@ const Username = styled.span`
   font-weight: bold;
   color: ${colors.backgroundTop};
   font-family: 'Kodchasan', sans-serif;
+
+  @media (max-width: 1000px) {
+    font-size: 1rem;
+  }
 `;
 
 const Stats = styled.span`
@@ -104,6 +144,10 @@ const Stats = styled.span`
   color: ${colors.dividerPrimary};
   font-family: 'Kodchasan', sans-serif;
   margin-top: 2px;
+
+  @media (max-width: 1000px) {
+    font-size: 0.9rem;
+  }
 `;
 
 const StyledAllClubsButton = styled.button`
@@ -123,6 +167,18 @@ const StyledAllClubsButton = styled.button`
   font-family: 'Kodchasan', sans-serif;
   grid-column: 3;
   justify-self: end;
+
+  @media (max-width: 1000px) {
+    font-size: 0.9rem;
+  }
+
+  @media (max-width: 900px) {
+    grid-column: 2;
+  }
+
+  @media (max-width: 700px) {
+    grid-column: 1;
+  }
 
   &:hover svg {
     margin-left: 0px;
