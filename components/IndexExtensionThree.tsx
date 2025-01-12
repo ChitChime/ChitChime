@@ -18,6 +18,7 @@ const CenteredImage = styled(Image)` // Update to use Image component
   height: auto;
   margin: 0;
   padding: 0;
+  width: 100%;
 `;
 
 const Footer = styled.div`
