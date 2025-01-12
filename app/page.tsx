@@ -760,6 +760,11 @@ export default function Home() {
           rel="stylesheet"
           href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=chevron_right&display=optional"
         />
+        {/* Remove custom font link */}
+        {/* <link
+          href="https://fonts.googleapis.com/css2?family=Kodchasan:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet"
+        /> */}
       </Head>
       <GlobalStyle />
 
