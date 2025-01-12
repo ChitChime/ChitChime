@@ -6,14 +6,15 @@ const nextConfig: NextConfig = {
     styledComponents: true,
   },
   images: {
-    domains: ["your-image-domain.com"], // دامنه‌های تصاویر خود را اضافه کنید
+    domains: ["example.com", "cdn.example.com"],
   },
   eslint: {
-    ignoreDuringBuilds: true, // موقتاً خطاهای ESLint را نادیده بگیر
+    ignoreDuringBuilds: process.env.NODE_ENV === "development",
   },
   typescript: {
-    ignoreBuildErrors: true, // موقتاً خطاهای TypeScript را نادیده بگیر
+    ignoreBuildErrors: process.env.NODE_ENV === "development",
   },
 };
 
 export default nextConfig;
+  
