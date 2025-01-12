@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import colors from "../styles/colors";
+import Image from 'next/image'; // Import Next.js Image component
 
 const PageContainer = styled.div`
   display: flex;
@@ -12,7 +13,7 @@ const PageContainer = styled.div`
   box-sizing: border-box;
 `;
 
-const CenteredImage = styled.img`
+const CenteredImage = styled(Image)` // Update to use Image component
   max-width: 100%;
   height: auto;
   margin: 0;
@@ -65,18 +66,18 @@ const SocialIcons = styled.div`
 export default function CenteredImageWithFooter() {
   return (
     <PageContainer>
-      <CenteredImage src="/index-images/footer-pic.png" alt="Centered Footer Image" />
+      <CenteredImage src="/index-images/footer-pic.png" alt="Centered Footer Image" width={500} height={300} />
       <Footer>
         <FooterText>ChitChime</FooterText>
         <SocialIcons>
           <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
-            <img src="/index-images/instagram.png" alt="Instagram" />
+            <Image src="/index-images/instagram.png" alt="Instagram" width={30} height={30} />
           </a>
           <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">
-            <img src="/index-images/linkedin.png" alt="LinkedIn" />
+            <Image src="/index-images/linkedin.png" alt="LinkedIn" width={30} height={30} />
           </a>
           <a href="https://youtube.com" target="_blank" rel="noopener noreferrer">
-            <img src="/index-images/youtube.png" alt="YouTube" />
+            <Image src="/index-images/youtube.png" alt="YouTube" width={30} height={30} />
           </a>
         </SocialIcons>
       </Footer>
