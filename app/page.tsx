@@ -23,52 +23,52 @@ const gradientAnimation = keyframes`
 `;
 
 // انیمیشن fade in
-const fadeIn = keyframes`
-  from {
-    opacity: 0;
-    transform: scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-`;
+// const fadeIn = keyframes`
+//   from {
+//     opacity: 0;
+//     transform: scale(0.95);
+//   }
+//   to {
+//     opacity: 1;
+//     transform: scale(1);
+//   }
+// `;
 
 // انیمیشن fade out
-const fadeOut = keyframes`
-  from {
-    opacity: 1;
-    transform: scale(1);
-  }
-  to {
-    opacity: 0.95;
-    transform: scale(0.95);
-  }
-`;
+// const fadeOut = keyframes`
+//   from {
+//     opacity: 1;
+//     transform: scale(1);
+//   }
+//   to {
+//     opacity: 0.95;
+//     transform: scale(0.95);
+//   }
+// `;
 
 // انیمیشن slide down
-const slideDown = keyframes`
-  from {
-    transform: translateY(-100%);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
-`;
+// const slideDown = keyframes`
+//   from {
+//     transform: translateY(-100%);
+//     opacity: 0;
+//   }
+//   to {
+//     transform: translateY(0);
+//     opacity: 1;
+//   }
+// `;
 
 // انیمیشن slide up
-const slideUp = keyframes`
-  from {
-    transform: translateY(0);
-    opacity: 1;
-  }
-  to {
-    transform: translateY(-100%);
-    opacity: 0;
-  }
-`;
+// const slideUp = keyframes`
+//   from {
+//     transform: translateY(0);
+//     opacity: 1;
+//   }
+//   to {
+//     transform: translateY(-100%);
+//     opacity: 0;
+//   }
+// `;
 
 /* گلوبال استایل */
 const GlobalStyle = createGlobalStyle`
@@ -312,18 +312,6 @@ const NavLink = styled.a`
 
   @media (max-width: 768px) {
     font-size: 0.8rem;
-  }
-`;
-
-const ProfileIcon = styled.img`
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  cursor: pointer;
-  margin-right: 20px;
-
-  @media (max-width: 768px) {
-    margin-right: 10px;
   }
 `;
 
