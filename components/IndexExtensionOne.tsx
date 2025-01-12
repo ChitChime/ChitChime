@@ -19,6 +19,11 @@ const SpotlightWrapper = styled.section`
   @media (max-width: 1100px) {
     padding: 100px 60px; /* Add padding */
   }
+
+  @media (max-width: 800px) {
+    align-items: center; /* Center content */
+    justify-content: center; /* Center content */
+  }
 `;
 
 const CardGrid = styled.div`
@@ -37,6 +42,10 @@ const CardGrid = styled.div`
 
   @media (max-width: 1000px) {
     gap: 10px; /* Update gap */
+  }
+
+  @media (max-width: 800px) {
+    display: none; /* Hide the main div containing the images */
   }
 `;
 
@@ -248,6 +257,57 @@ const DescriptionWrapper = styled.div`
 
     button {
       font-size: 0.8rem; /* Update font size */
+    }
+  }
+
+  @media (max-width: 900px) {
+    h2 {
+      font-size: 2.5rem; /* Update font size */
+    }
+
+    p {
+      font-size: 0.8rem; /* Update font size */
+    }
+
+    button {
+      padding: 15px 25px; /* Update padding */
+    }
+  }
+
+  @media (max-width: 800px) {
+    align-items: center; /* Center align items */
+    width: 100%; /* Update width */
+
+    h2, p, button {
+      text-align: center; /* Center text */
+    }
+
+    h2 {
+      font-size: 4rem; /* Update font size */
+    }
+
+    p {
+      font-size: 1rem; /* Update font size */
+      margin-top: 20px; /* Update margin-top */
+    }
+
+    button {
+      font-size: 1rem; /* Update font size */
+    }
+  }
+
+  @media (max-width: 480px) {
+    h2 {
+      font-size: 3rem; /* Update font size */
+    }
+
+    p {
+      font-size: 0.9rem; /* Update font size */
+      margin-top: 10px; /* Update margin-top */
+    }
+
+    button {
+      font-size: 0.9rem; /* Update font size */
     }
   }
 `;
