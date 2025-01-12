@@ -1,4 +1,4 @@
-import styled, { keyframes } from "styled-components";
+import styled, { keyframes, createGlobalStyle } from "styled-components";
 import colors from "../styles/colors";
 import { useEffect, useState } from "react";
 
@@ -20,6 +20,81 @@ const fadeOutAnimation = keyframes`
   to {
     opacity: 0;
     visibility: hidden;
+  }
+`;
+
+const GlobalStyle = createGlobalStyle`
+  @font-face {
+    font-family: 'Kodchasan';
+    src: url('/fonts/Kodchasan-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'Kodchasan';
+    src: url('/fonts/Kodchasan-BoldItalic.ttf') format('truetype');
+    font-weight: bold;
+    font-style: italic;
+  }
+  @font-face {
+    font-family: 'Kodchasan';
+    src: url('/fonts/Kodchasan-ExtraLight.ttf') format('truetype');
+    font-weight: 200;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'Kodchasan';
+    src: url('/fonts/Kodchasan-ExtraLightItalic.ttf') format('truetype');
+    font-weight: 200;
+    font-style: italic;
+  }
+  @font-face {
+    font-family: 'Kodchasan';
+    src: url('/fonts/Kodchasan-Italic.ttf') format('truetype');
+    font-weight: normal;
+    font-style: italic;
+  }
+  @font-face {
+    font-family: 'Kodchasan';
+    src: url('/fonts/Kodchasan-Light.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'Kodchasan';
+    src: url('/fonts/Kodchasan-LightItalic.ttf') format('truetype');
+    font-weight: 300;
+    font-style: italic;
+  }
+  @font-face {
+    font-family: 'Kodchasan';
+    src: url('/fonts/Kodchasan-Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'Kodchasan';
+    src: url('/fonts/Kodchasan-MediumItalic.ttf') format('truetype');
+    font-weight: 500;
+    font-style: italic;
+  }
+  @font-face {
+    font-family: 'Kodchasan';
+    src: url('/fonts/Kodchasan-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'Kodchasan';
+    src: url('/fonts/Kodchasan-SemiBold.ttf') format('truetype');
+    font-weight: 600;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'Kodchasan';
+    src: url('/fonts/Kodchasan-SemiBoldItalic.ttf') format('truetype');
+    font-weight: 600;
+    font-style: italic;
   }
 `;
 
@@ -83,13 +158,16 @@ const LoadingComponent = ({ loading, text = "ChitChime" }) => {
   if (!isVisible) return null;
 
   return (
-    <LoadingScreen $fadeOut={fadeOut}>
-      {[...text].map((char, index) => (
-        <Letter key={index} delay={index * 100} $fadeOut={fadeOut}>
-          {char}
-        </Letter>
-      ))}
-    </LoadingScreen>
+    <>
+      <GlobalStyle />
+      <LoadingScreen $fadeOut={fadeOut}>
+        {[...text].map((char, index) => (
+          <Letter key={index} delay={index * 100} $fadeOut={fadeOut}>
+            {char}
+          </Letter>
+        ))}
+      </LoadingScreen>
+    </>
   );
 };
 
