@@ -29,17 +29,25 @@ const Footer = styled.div`
 `;
 
 const FooterText = styled.span`
-  font-size: 1.8rem; /* Increased font size */
+  font-size: 1.5rem; /* Updated font size */
   font-weight: bold;
   color: ${colors.text};
   font-family: 'Kodchasan', sans-serif;
   margin-left: 50px; /* Add margin to the left */
+
+  @media (max-width: 400px) {
+    font-size: 1.2rem; /* Updated font size for small screens */
+  }
 `;
 
 const SocialIcons = styled.div`
   display: flex;
-  gap: 15px;
+  gap: 10px; /* Updated gap */
   margin-right: 50px; /* Add margin to the right */
+
+  @media (max-width: 400px) {
+    gap: 5px; /* Updated gap for small screens */
+  }
 
   img {
     width: 30px; /* Increased icon size */
