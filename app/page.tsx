@@ -152,12 +152,7 @@ const GlobalStyle = createGlobalStyle`
     padding: 0;
     box-sizing: border-box;
     scroll-behavior: smooth;
-    overflow-y: scroll;
-    scrollbar-width: none;   
-    -ms-overflow-style: none;
-    &::-webkit-scrollbar {
-      display: none;
-    }
+    overflow-y: auto; // Ensure only one scrollbar
     min-height: 100vh;
 
     @media (max-width: 768px) {
@@ -197,6 +192,7 @@ const Container = styled.div`
   border-radius: 0 0 150px 0;
   position: relative;
   padding: 0 20px;
+  overflow: hidden; // Ensure no additional scrollbar
 
   @media (max-width: 768px) {
     align-items: center;
@@ -862,7 +858,7 @@ export default function Home() {
               <NavLink href="#">Home</NavLink>
               <NavLink href="#">About</NavLink>
               <NavLink href="#">Clubs</NavLink>
-              <NavLink href="#">Contact</NavLink>
+              <NavLink href="/contact-us">Contact Us</NavLink>
             </MobileMenu>
           )}
           <NavWrapper>
@@ -871,7 +867,7 @@ export default function Home() {
                 <NavLink href="#">Home</NavLink>
                 <NavLink href="#">About</NavLink>
                 <NavLink href="#">Clubs</NavLink>
-                <NavLink href="#">Contact</NavLink>
+                <NavLink href="/contact-us">Contact Us</NavLink>
               </Nav>
               <ProfileButton>Dashboard</ProfileButton>
             </NavContainer>
