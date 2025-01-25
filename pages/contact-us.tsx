@@ -470,7 +470,7 @@ export default function ContactUsHeader() {
   }, []);
 
   useEffect(() => {
-    function handleIntersection(entries, observer) {
+    function handleIntersection(entries: IntersectionObserverEntry[], observer: IntersectionObserver) {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           entry.target.classList.add("is-visible");
