@@ -3,10 +3,10 @@
 import styled, { createGlobalStyle, keyframes } from "styled-components";
 import Head from "next/head";
 import { useState, useEffect } from "react";
-import colors from "../styles/colors"; // Ensure this path is correct
-import Image from "next/image"; // for smaller logo
-import IndexExtensionThree from "../components/IndexExtensionThree"; // Ensure this path is correct
-import LoadingComponent from "../components/LoadingComponent"; // Import LoadingComponent
+import colors from "../styles/colors";
+import Image from "next/image";
+import IndexExtensionThree from "../components/IndexExtensionThree";
+import LoadingComponent from "../components/LoadingComponent";
 
 const GlobalStyle = createGlobalStyle`
   /* Font imports from page.tsx */
@@ -66,56 +66,204 @@ const HeaderSection = styled.div`
   }
 `;
 
-// Add a top menu (simplified version)
 const Header = styled.header`
+  z-index: 10;
   display: flex;
+  width: 100%;
   justify-content: space-between;
-  align-items: center;
-  background-color: ${colors.backgroundTop};
-  padding: 20px;
-  top: 0;
-  z-index: 999;
+  margin-top: 50px;
+  flex-direction: row;
+
+  @media (max-width: 768px) {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
 `;
 
 const LogoButton = styled.button`
+  font-family: 'Kodchasan', sans-serif;
   background: none;
   border: none;
-  cursor: pointer;
-  margin-left: 20px;
+  margin-left: 70px;
   display: flex;
   align-items: center;
+  cursor: pointer;
+
   img {
-    width: 110px; /* لوگوی بزرگ‌تر */
-    height: 70px;
     object-fit: contain;
-    @media (max-width: 480px) {
-      width: 90px;
-      height: 60px;
+    width: 150px;
+    height: 110px;
+
+    @media (max-width: 768px) {
+      width: 100px;
+      height: 80px;
+      margin-left: 0;
     }
+
+    @media (max-width: 900px) {
+      width: 130px;
+      height: 90px;
+    }
+
+    @media (max-width: 600px) {
+      width: 110px;
+      height: 70px;
+    }
+  }
+
+  @media (max-width: 1100px) {
+    margin-left: 40px;
+  }
+
+  @media (max-width: 600px) {
+    margin-left: 20px;
   }
 `;
 
-const NavWrapper = styled.nav`
+const NavWrapper = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+  flex: 1;
+  margin-right: 70px;
+
+  @media (max-width: 1100px) {
+    margin-right: 40px;
+  }
+
+  @media (max-width: 1000px) {
+    margin-right: 20px;
+  }
+
   @media (max-width: 768px) {
     display: none;
   }
-  display: flex;
-  gap: 20px;
-  align-items: center;
+
+  @media (max-width: 600px) {
+    margin-right: 30px;
+  }
 `;
 
 const NavContainer = styled.div`
   display: flex;
   align-items: center;
-  gap: 40px; /* Gap between menu and dashboard */
+  gap: 70px;
+
+  @media (max-width: 1100px) {
+    gap: 40px;
+  }
+
+  @media (max-width: 800px) {
+    gap: 30px;
+  }
+`;
+
+const Nav = styled.nav`
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  letter-spacing: 1px;
+
+  @media (max-width: 800px) {
+    gap: 20px;
+  }
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: 15px;
+  }
 `;
 
 const NavLink = styled.a`
+  cursor: pointer;
   text-decoration: none;
   color: ${colors.text};
-  font-size: 0.9rem; /* Font size for header */
+  font-size: 0.9rem;
+  font-weight: 300;
+  transition: color 0.3s ease;
+
   &:hover {
     color: ${colors.dividerPrimary};
+  }
+
+  @media (max-width: 1000px) {
+    font-size: 0.8rem;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 0.8rem;
+  }
+`;
+
+const HamburgerMenu = styled.div`
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  z-index: 30; /* اطمینان از نمایش بالاتر از منوی پس‌زمینه */
+  margin-right: 40px;
+  position: relative; /* موقعیت‌دهی نسبی */
+
+  @media (max-width: 768px) {
+    display: flex;
+  }
+
+  div {
+    width: 25px;
+    height: 3px;
+    background-color: ${colors.text};
+    margin: 4px 0;
+    transition: 0.4s;
+  }
+
+  /* خطوط برای تبدیل به ضربدر */
+  &.open div:nth-child(1) {
+    transform: rotate(45deg) translate(3px, 5px);
+    background-color: ${colors.dividerPrimary}; /* تغییر رنگ در صورت نیاز */
+  }
+
+  &.open div:nth-child(2) {
+    transform: rotate(-45deg) translate(3px, -5px);
+    background-color: #8291E4; /* تغییر رنگ در صورت نیاز */
+  }
+
+  &.open div:nth-child(3) {
+    opacity: 0; /* خط وسط را مخفی می‌کنیم */
+  }
+`;
+
+const MobileMenu = styled.div`
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(10px);
+  z-index: 10;
+  transform: scale(0.5);
+  opacity: 0;
+  transition: transform 0.5s ease, opacity 0.5s ease;
+
+  &.open {
+    display: flex;
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  a {
+    color: ${colors.text};
+    font-size: 1.5rem;
+    margin: 20px 0;
+    transition: opacity 0.5s ease;
+
+    &:hover {
+      opacity: 0.7;
+    }
   }
 `;
 
@@ -125,72 +273,22 @@ const ProfileButton = styled.button`
   color: ${colors.backgroundTop};
   padding: 10px 30px;
   border-radius: 20px;
-  font-size: 0.9rem; /* Font size for header */
+  font-size: 0.9rem;
   letter-spacing: 1px;
   cursor: pointer;
-  transition: background-color 0.3s, color 0.3s; /* Add transition for smooth color change */
-  margin-right: 30px; /* Margin from the right */
+  transition: background-color 0.3s ease, color 0.3s ease;
+
   &:hover {
     background-color: ${colors.cardSecondary};
     color: ${colors.text};
   }
-  @media (max-width: 480px) {
-    padding: 8px 20px;
+
+  @media (max-width: 1000px) {
     font-size: 0.8rem;
   }
-`;
 
-const HamburgerMenu = styled.div<{ open?: boolean }>`
-  display: none;
-  @media (max-width: 768px) {
-    display: flex;
-    flex-direction: column;
-    margin-right: 20px;
-    cursor: pointer;
-  }
-  div {
-    width: 25px;
-    height: 3px;
-    background-color: ${colors.text};
-    margin: 4px 0;
-    transition: transform 0.4s, opacity 0.4s, background-color 0.3s; /* Ensure all transitions are included */
-  }
-  ${({ open }) =>
-    open &&
-    `
-    div:nth-child(1) {
-      transform: rotate(45deg) translate(4px, 6px);
-    }
-    div:nth-child(2) {
-      opacity: 0;
-    }
-    div:nth-child(3) {
-      transform: rotate(-45deg) translate(5px, -5px);
-    }
-  `}
-  &:hover div {
-    background-color: ${colors.dividerPrimary}; /* Change color on hover */
-  }
-`;
-
-const MobileMenu = styled.div<{ open?: boolean }>`
-  display: none;
-  @media (max-width: 768px) {
-    display: ${({ open }) => (open ? "flex" : "none")};
-    position: absolute;
-    top: 70px;
-    right: 20px;
-    background: ${colors.backgroundBottom};
-    flex-direction: column;
-    gap: 10px;
-    padding: 15px;
-    border-radius: 10px;
-  }
-  a {
-    color: ${colors.text};
-    &:hover {
-      color: ${colors.dividerPrimary};
-    }
+  @media (max-width: 800px) {
+    padding: 10px 20px;
   }
 `;
 
@@ -199,7 +297,7 @@ const Title = styled.h1`
   font-weight: bold;
   color: ${colors.text};
   margin: 0;
-  @media (max-width: 480px) {
+  @media (max-width: 600px) {
     font-size: 2.5rem;
   }
 `;
@@ -210,7 +308,7 @@ const Divider = styled.div`
   background-color: ${colors.dividerPrimary};
   border-radius: 10px;
   margin: 20px auto;
-  @media (max-width: 480px) {
+  @media (max-width: 600px) {
     width: 100px;
     height: 6px;
   }
@@ -229,9 +327,12 @@ const Description = styled.p`
   @media (max-width: 768px) {
     padding: 0 80px;
   }
-  @media (max-width: 480px) {
+  @media (max-width: 600px) {
     padding: 0 20px;
     font-size: 0.85rem;
+  }
+  @media (min-width: 1190px) {
+    padding: 0 300px; /* Change padding for screens larger than 1190px */
   }
 `;
 
@@ -252,14 +353,13 @@ const ContactSection = styled.div`
     align-items: center;
     padding: 60px 40px;
   }
-  @media (max-width: 480px) {
+  @media (max-width: 600px) {
     padding: 40px 20px;
   }
 `;
 
 const FormWrapper = styled(AnimatedElement)`
   flex: 1;
-  min-width: 55%;
   display: flex;
   flex-direction: column;
   gap: 15px;
@@ -272,7 +372,7 @@ const RowWrapper = styled.div`
   display: flex;
   gap: 15px; /* فاصله بین فیلدها */
   width: 100%;
-  @media (max-width: 480px) {
+  @media (max-width: 600px) {
     flex-direction: column;
   }
 `;
@@ -288,7 +388,7 @@ const FormInput = styled(AnimatedElement).attrs({ as: 'input' })`
   flex: 1; /* برای تقسیم مساوی عرض */
   font-family: 'Kodchasan', sans-serif; /* Apply font */
   width: -webkit-fill-available; /* Ensure email input is the same size */
-  @media (max-width: 480px) {
+  @media (max-width: 600px) {
     padding: 14px 16px;
   }
 `;
@@ -305,7 +405,7 @@ const FormTextArea = styled(AnimatedElement).attrs({ as: 'textarea' })`
   height: -webkit-fill-available;
   width: -webkit-fill-available; /* Stretch the message input */
   font-family: 'Kodchasan', sans-serif; /* Apply font */
-  @media (max-width: 480px) {
+  @media (max-width: 600px) {
     padding: 14px 16px;
   }
 `;
@@ -323,9 +423,12 @@ const SubmitButton = styled(AnimatedElement).attrs({ as: 'button' })`
   &:hover {
     background-color: ${colors.dividerPrimary};
   }
-  @media (max-width: 480px) {
+  @media (max-width: 600px) {
     font-size: 0.9rem;
     padding: 12px 24px;
+  }
+  @media (max-width: 1190px) {
+    margin-bottom: 50px; /* Add margin-bottom for screens with a maximum width of 1190px */
   }
 `;
 
@@ -340,6 +443,15 @@ const NewsletterWrapper = styled(AnimatedElement)`
   align-items: center;
   text-align: center;
   color: ${colors.text}; /* Set text color */
+  @media (max-width: 1190px) {
+    margin-top: 50px; /* Add margin-top for screens larger than 1190px */
+  }
+  @media (max-width: 1190px) {
+    aspect-ratio: auto; /* Remove aspect-ratio for screens larger than 1190px */
+  }
+  @media (max-width: 768px) {
+    width: auto; /* Set width to auto for screens with a maximum width of 768px */
+  }
   h3 {
     font-size: 1.5rem; /* Increase font size */
     margin-bottom: 10px; /* Add margin-bottom */
@@ -348,7 +460,7 @@ const NewsletterWrapper = styled(AnimatedElement)`
   width: 100%; /* Ensure it takes full width */
   aspect-ratio: 1; /* Ensure it is always a square */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow */
-  @media (max-width: 480px) {
+  @media (max-width: 600px) {
     padding: 20px 15px;
   }
 `;
@@ -362,7 +474,7 @@ const NewsletterInput = styled(AnimatedElement).attrs({ as: 'input' })`
   width: -webkit-fill-available;
   margin-bottom: 15px;
   font-family: 'Kodchasan', sans-serif; /* Apply font */
-  @media (max-width: 480px) {
+  @media (max-width: 600px) {
     font-size: 0.9rem;
     padding: 14px 16px;
   }
@@ -382,20 +494,17 @@ const InfoCardsWrapper = styled.div`
     padding: 40px 80px;
   }
   @media (max-width: 768px) {
-    flex-direction: column;
+    flex-direction: column; /* Set flex-direction to column for screens with a maximum width of 768px */
     align-items: center;
     padding: 30px 40px;
     padding-bottom: 60px;
   }
-  @media (max-width: 480px) {
-    padding: 20px;
-    padding-bottom: 40px;
+  @media (max-width: 600px) {
   }
 `;
 
 const InfoCard = styled(AnimatedElement)`
   flex: 1;
-  min-width: 300px;
   max-width: 350px;
   background-color: ${colors.backgroundBottom};
   border-radius: 30px; /* Change border-radius to 30px */
@@ -411,7 +520,7 @@ const InfoCard = styled(AnimatedElement)`
     max-width: 500px;
     margin-bottom: 20px;
   }
-  @media (max-width: 480px) {
+  @media (max-width: 600px) {
     padding: 30px 20px;
   }
 `;
@@ -420,7 +529,7 @@ const IconWrapper = styled.span`
   font-size: 2.5rem;
   color: ${colors.text};
   font-family: "Material Icons";
-  @media (max-width: 480px) {
+  @media (max-width: 600px) {
     font-size: 2rem;
   }
 `;
@@ -434,7 +543,7 @@ const InfoTitle = styled.h3`
   font-size: 1.1rem;
   font-weight: bold;
   margin: 0 0 10px;
-  @media (max-width: 480px) {
+  @media (max-width: 600px) {
     font-size: 1rem;
   }
 `;
@@ -442,7 +551,7 @@ const InfoTitle = styled.h3`
 const InfoDescription = styled.p`
   font-size: 0.9rem;
   margin: 0;
-  @media (max-width: 480px) {
+  @media (max-width: 600px) {
     font-size: 0.8rem;
   }
 `;
@@ -450,6 +559,7 @@ const InfoDescription = styled.p`
 export default function ContactUsHeader() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [menuVisible, setMenuVisible] = useState(false);
 
   useEffect(() => {
     // اگر صفحه از قبل لود شده بود
@@ -521,19 +631,21 @@ export default function ContactUsHeader() {
         </LogoButton>
         <NavWrapper>
           <NavContainer>
-            <NavLink href="/">Home</NavLink>
-            <NavLink href="#">About</NavLink>
-            <NavLink href="#">Clubs</NavLink>
-            <NavLink href="/contact-us">Contact Us</NavLink>
+            <Nav>
+              <NavLink href="/">Home</NavLink>
+              <NavLink href="#">About</NavLink>
+              <NavLink href="#">Clubs</NavLink>
+              <NavLink href="/contact-us">Contact Us</NavLink>
+            </Nav>
             <ProfileButton>Dashboard</ProfileButton>
           </NavContainer>
         </NavWrapper>
-        <HamburgerMenu open={menuOpen} onClick={() => setMenuOpen(!menuOpen)}>
+        <HamburgerMenu className={menuOpen ? "open" : ""} onClick={() => setMenuOpen(!menuOpen)}>
           <div />
           <div />
           <div />
         </HamburgerMenu>
-        <MobileMenu open={menuOpen}>
+        <MobileMenu className={menuOpen ? "open" : ""}>
           <NavLink href="/">Home</NavLink>
           <NavLink href="#">About</NavLink>
           <NavLink href="#">Clubs</NavLink>
