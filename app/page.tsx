@@ -856,7 +856,7 @@ export default function Home() {
           {menuVisible && (
             <MobileMenu className={menuOpen ? 'open' : ''} onClick={closeMenu}>
               <NavLink href="#">Home</NavLink>
-              <NavLink href="#">About</NavLink>
+              <NavLink href="/about-us">About</NavLink> {/* Update link to about-us */}
               <NavLink href="#">Clubs</NavLink>
               <NavLink href="/contact-us">Contact Us</NavLink>
             </MobileMenu>
@@ -865,7 +865,7 @@ export default function Home() {
             <NavContainer>
               <Nav>
                 <NavLink href="#">Home</NavLink>
-                <NavLink href="#">About</NavLink>
+                <NavLink href="/about-us">About</NavLink> {/* Update link to about-us */}
                 <NavLink href="#">Clubs</NavLink>
                 <NavLink href="/contact-us">Contact Us</NavLink>
               </Nav>

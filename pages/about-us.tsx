@@ -336,7 +336,7 @@ const Description = styled.p`
   }
 `;
 
-const ContactSection = styled.div`
+const AboutSection = styled.div`
   background-color: ${colors.text};
   padding: 100px 150px; /* تغییر مقدار padding */
   display: flex;
@@ -556,19 +556,67 @@ const InfoDescription = styled.p`
   }
 `;
 
-export default function ContactUsHeader() {
+const NewSection = styled.div`
+  padding-left: 100px;
+  padding-right: 100px;
+  padding-top: 100px;
+  padding-bottom: 200px;
+  background-color: ${colors.text};
+  color: ${colors.backgroundTop};
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    padding: 30px;
+  }
+`;
+
+const TextBlock = styled.div`
+  flex: 1;
+  min-width: 300px;
+
+  h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+  }
+
+  p {
+    font-size: 1rem;
+    line-height: 1.5;
+    margin-bottom: 20px;
+  }
+`;
+
+const ImageBlock = styled.div`
+  flex: 1;
+  min-width: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+`;
+
+export default function AboutUsHeader() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [loading, setLoading] = useState(true);
   const [menuVisible, setMenuVisible] = useState(false);
 
   useEffect(() => {
-    // اگر صفحه از قبل لود شده بود
     if (document.readyState === "complete") {
       setLoading(false);
       return;
     }
 
-    // منتظر رویداد load بمانیم
     const handleLoad = () => {
       setLoading(false);
     };
@@ -597,7 +645,6 @@ export default function ContactUsHeader() {
     const elements = document.querySelectorAll(".animate-on-scroll");
     elements.forEach((el) => observer.observe(el));
 
-    // Manual check after a short delay
     setTimeout(() => {
       elements.forEach((el) => {
         const rect = el.getBoundingClientRect();
@@ -616,15 +663,14 @@ export default function ContactUsHeader() {
   return (
     <>
       <Head>
-        <title>Contact Us</title>
+        <title>About Us</title>
         <link
           href="https://fonts.googleapis.com/icon?family=Material+Icons"
           rel="stylesheet"
         />
       </Head>
       <GlobalStyle />
-      <LoadingComponent loading={loading} /> {/* Add LoadingComponent */}
-      {/* Top menu */}
+      <LoadingComponent loading={loading} />
       <Header>
         <LogoButton>
           <Image src="/assets/ChitChime-Logo.webp" alt="Chit-Chime Logo" width={150} height={110} />
@@ -633,7 +679,7 @@ export default function ContactUsHeader() {
           <NavContainer>
             <Nav>
               <NavLink href="/">Home</NavLink>
-              <NavLink href="/about-us">About</NavLink> {/* Update link to about-us */}
+              <NavLink href="#">About</NavLink>
               <NavLink href="#">Clubs</NavLink>
               <NavLink href="/contact-us">Contact Us</NavLink>
             </Nav>
@@ -647,71 +693,43 @@ export default function ContactUsHeader() {
         </HamburgerMenu>
         <MobileMenu className={menuOpen ? "open" : ""}>
           <NavLink href="/">Home</NavLink>
-          <NavLink href="/about-us">About</NavLink> {/* Update link to about-us */}
+          <NavLink href="#">About</NavLink>
           <NavLink href="#">Clubs</NavLink>
           <NavLink href="/contact-us">Contact Us</NavLink>
           <ProfileButton>Dashboard</ProfileButton>
         </MobileMenu>
       </Header>
       <HeaderSection>
-        <Title>Contact Us</Title>
+        <Title>About Us</Title>
         <Divider />
         <Description>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec
           ullamcorper mattis, pulvinar dapibus leo.
         </Description>
       </HeaderSection>
-      {/* Contact Form Section */}
-      <ContactSection>
-        <FormWrapper className="animate-on-scroll">
-          <RowWrapper>
-            <FormInput className="animate-on-scroll" placeholder="Name" />
-            <FormInput className="animate-on-scroll" placeholder="Phone" />
-          </RowWrapper>
-          <FormInput className="animate-on-scroll" placeholder="Email" />
-          <FormTextArea className="animate-on-scroll" placeholder="Message"></FormTextArea>
-          <SubmitButton className="animate-on-scroll">Submit Button</SubmitButton>
-        </FormWrapper>
-        <NewsletterWrapper className="animate-on-scroll">
-          <h3>Our Newsletters</h3>
+      <NewSection>
+        <TextBlock>
+          <h2>We make sure your idea & creation delivered properly</h2>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec
-            ullamcorper mattis, pulvinar dapibus leo.
+            Pellentesque mollis urna vel semper egestas. Duis ac dictum lacus. Sed sagittis non nunc ac malesuada.
           </p>
-          <NewsletterInput className="animate-on-scroll" placeholder="Email" />
-          <SubmitButton className="animate-on-scroll">Submit Button</SubmitButton>
-        </NewsletterWrapper>
-      </ContactSection>
-      {/* Info Cards Section */}
-      <InfoCardsWrapper>
-        <InfoCard className="animate-on-scroll">
-          <IconWrapper className="material-icons">phone</IconWrapper>
-          <InfoContent>
-            <InfoTitle>(+876) 765 665</InfoTitle>
-            <InfoDescription>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-            </InfoDescription>
-          </InfoContent>
-        </InfoCard>
-        <InfoCard className="animate-on-scroll">
-          <IconWrapper className="material-icons">email</IconWrapper>
-          <InfoContent>
-            <InfoTitle>mail@influenca.id</InfoTitle>
-            <InfoDescription>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-            </InfoDescription>
-          </InfoContent>
-        </InfoCard>
-        <InfoCard className="animate-on-scroll">
-          <IconWrapper className="material-icons">location_on</IconWrapper>
-          <InfoContent>
-            <InfoTitle>London Eye London</InfoTitle>
-            <InfoDescription>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-            </InfoDescription>
-          </InfoContent>
-        </InfoCard>
-      </InfoCardsWrapper>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </p>
+        </TextBlock>
+        <ImageBlock>
+          <Image src="/index-images/a_cat_reading_book_with_colorful_background_2tphl0ksvxsuh6russn9_1.png" alt="Founder" width={300} height={200} />
+        </ImageBlock>
+        <TextBlock>
+          <h2>We empower small business owners</h2>
+          <p>
+            Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+          </p>
+          <blockquote>
+            "Making an impact, together" - Socioly Founder
+          </blockquote>
+        </TextBlock>
+      </NewSection>
       <IndexExtensionThree />
     </>
   );
