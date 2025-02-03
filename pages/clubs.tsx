@@ -7,6 +7,7 @@ import colors from "../styles/colors";
 import Image from "next/image";
 import IndexExtensionThree from "../components/IndexExtensionThree";
 import LoadingComponent from "../components/LoadingComponent";
+import CourseCards from "../components/CourseCards";
 
 const GlobalStyle = createGlobalStyle`
   /* Font imports from page.tsx */
@@ -321,6 +322,9 @@ const Description = styled.p`
   line-height: 1.5;
   padding: 0 400px;
   margin-bottom: 30px; /* Add margin-bottom */
+  @media (max-width: 1150px) {
+    padding: 0 200px; /* Change padding for screens larger than 1150px */
+  }
   @media (max-width: 1024px) {
     padding: 0 200px;
   }
@@ -331,12 +335,9 @@ const Description = styled.p`
     padding: 0 20px;
     font-size: 0.85rem;
   }
-  @media (min-width: 1190px) {
-    padding: 0 300px; /* Change padding for screens larger than 1190px */
-  }
 `;
 
-const ContactSection = styled.div`
+const AboutSection = styled.div`
   background-color: ${colors.text};
   padding: 100px 150px; /* تغییر مقدار padding */
   display: flex;
@@ -556,19 +557,17 @@ const InfoDescription = styled.p`
   }
 `;
 
-export default function ContactUsHeader() {
+export default function ClubsHeader() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [loading, setLoading] = useState(true);
   const [menuVisible, setMenuVisible] = useState(false);
 
   useEffect(() => {
-    // اگر صفحه از قبل لود شده بود
     if (document.readyState === "complete") {
       setLoading(false);
       return;
     }
 
-    // منتظر رویداد load بمانیم
     const handleLoad = () => {
       setLoading(false);
     };
@@ -597,7 +596,6 @@ export default function ContactUsHeader() {
     const elements = document.querySelectorAll(".animate-on-scroll");
     elements.forEach((el) => observer.observe(el));
 
-    // Manual check after a short delay
     setTimeout(() => {
       elements.forEach((el) => {
         const rect = el.getBoundingClientRect();
@@ -616,15 +614,14 @@ export default function ContactUsHeader() {
   return (
     <>
       <Head>
-        <title>Contact Us</title>
+        <title>Clubs</title>
         <link
           href="https://fonts.googleapis.com/icon?family=Material+Icons"
           rel="stylesheet"
         />
       </Head>
       <GlobalStyle />
-      <LoadingComponent loading={loading} /> {/* Add LoadingComponent */}
-      {/* Top menu */}
+      <LoadingComponent loading={loading} />
       <Header>
         <LogoButton>
           <Image src="/assets/ChitChime-Logo.webp" alt="Chit-Chime Logo" width={150} height={110} />
@@ -633,8 +630,8 @@ export default function ContactUsHeader() {
           <NavContainer>
             <Nav>
               <NavLink href="/">Home</NavLink>
-              <NavLink href="/about-us">About</NavLink>
-              <NavLink href="/clubs">Clubs</NavLink>
+              <NavLink href="#">About</NavLink>
+              <NavLink href="#">Clubs</NavLink>
               <NavLink href="/contact-us">Contact Us</NavLink>
             </Nav>
             <ProfileButton>Dashboard</ProfileButton>
@@ -647,70 +644,22 @@ export default function ContactUsHeader() {
         </HamburgerMenu>
         <MobileMenu className={menuOpen ? "open" : ""}>
           <NavLink href="/">Home</NavLink>
-          <NavLink href="/about-us">About</NavLink>
-          <NavLink href="/clubs">Clubs</NavLink>
+          <NavLink href="#">About</NavLink>
+          <NavLink href="#">Clubs</NavLink>
           <NavLink href="/contact-us">Contact Us</NavLink>
           <ProfileButton>Dashboard</ProfileButton>
         </MobileMenu>
       </Header>
       <HeaderSection>
-        <Title>Contact Us</Title>
+        <Title>Clubs</Title>
         <Divider />
         <Description>
-          Have questions or need assistance? We're here to help! Reach out to us for inquiries about book clubs, meetings, or anything else.
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec
+          ullamcorper mattis, pulvinar dapibus leo.
         </Description>
       </HeaderSection>
-      {/* Contact Form Section */}
-      <ContactSection>
-        <FormWrapper className="animate-on-scroll">
-          <RowWrapper>
-            <FormInput className="animate-on-scroll" placeholder="Name" />
-            <FormInput className="animate-on-scroll" placeholder="Phone" />
-          </RowWrapper>
-          <FormInput className="animate-on-scroll" placeholder="Email" />
-          <FormTextArea className="animate-on-scroll" placeholder="Message"></FormTextArea>
-          <SubmitButton className="animate-on-scroll">Submit Button</SubmitButton>
-        </FormWrapper>
-        <NewsletterWrapper className="animate-on-scroll">
-          <h3>Our Newsletters</h3>
-          <p>
-            Subscribe to our newsletter for the latest book club updates, upcoming meetings, reading recommendations, and special events.
-          </p>
-          <NewsletterInput className="animate-on-scroll" placeholder="Email" />
-          <SubmitButton className="animate-on-scroll">Submit Button</SubmitButton>
-        </NewsletterWrapper>
-      </ContactSection>
-      {/* Info Cards Section */}
-      <InfoCardsWrapper>
-        <InfoCard className="animate-on-scroll">
-          <Image src="/contactus-images/large-x-logo.png" alt="Twitter Logo" width={50} height={50} />
-          <InfoContent>
-            <InfoTitle>Twitter</InfoTitle>
-            <InfoDescription>
-              Follow us on X (Twitter) for updates
-            </InfoDescription>
-          </InfoContent>
-        </InfoCard>
-        <InfoCard className="animate-on-scroll">
-          <IconWrapper className="material-icons">email</IconWrapper>
-          <InfoContent>
-            <InfoTitle>Email</InfoTitle>
-            <InfoDescription>
-              Reach out for inquiries and we'll get back to you soon!
-            </InfoDescription>
-          </InfoContent>
-        </InfoCard>
-        <InfoCard className="animate-on-scroll">
-          <Image src="/contactus-images/linkedin-logo.png" alt="LinkedIn Logo" width={50} height={50} />
-          <InfoContent>
-            <InfoTitle>LinkedIn</InfoTitle>
-            <InfoDescription>
-              Connect with Zizi on LinkedIn for professional collaborations!
-            </InfoDescription>
-          </InfoContent>
-        </InfoCard>
-      </InfoCardsWrapper>
+      <CourseCards />
       <IndexExtensionThree />
     </>
   );
-}
+} 

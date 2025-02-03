@@ -680,7 +680,7 @@ export default function AboutUsHeader() {
             <Nav>
               <NavLink href="/">Home</NavLink>
               <NavLink href="#">About</NavLink>
-              <NavLink href="#">Clubs</NavLink>
+              <NavLink href="/clubs">Clubs</NavLink>
               <NavLink href="/contact-us">Contact Us</NavLink>
             </Nav>
             <ProfileButton>Dashboard</ProfileButton>
@@ -694,7 +694,7 @@ export default function AboutUsHeader() {
         <MobileMenu className={menuOpen ? "open" : ""}>
           <NavLink href="/">Home</NavLink>
           <NavLink href="#">About</NavLink>
-          <NavLink href="#">Clubs</NavLink>
+          <NavLink href="/clubs">Clubs</NavLink>
           <NavLink href="/contact-us">Contact Us</NavLink>
           <ProfileButton>Dashboard</ProfileButton>
         </MobileMenu>
@@ -703,30 +703,31 @@ export default function AboutUsHeader() {
         <Title>About Us</Title>
         <Divider />
         <Description>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec
-          ullamcorper mattis, pulvinar dapibus leo.
+          Hey there, fellow book lover! Welcome to Chitchime, where readers from all walks of life come together to share stories, ideas, and experiences across the globe. I'm Zizi, and I'm thrilled you're here. I've always loved getting lost in a good book, but it wasn't until one of my best friends moved halfway across the world that I realized just how hard it is to find the right people to talk books with—especially when time zones don't align and your friend hasn't read the same book! That's when the idea for Chitchime was born.
         </Description>
       </HeaderSection>
       <NewSection>
         <TextBlock>
-          <h2>We make sure your idea & creation delivered properly</h2>
+          <h2>
+            I wanted to create a space where book lovers could connect
+          </h2>
           <p>
-            Pellentesque mollis urna vel semper egestas. Duis ac dictum lacus. Sed sagittis non nunc ac malesuada.
+            Whether you're into literary classics, futuristic sci-fi, poetry that moves you, or gripping contemporary novels, you'll find your tribe here.
           </p>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            Whether you're into literary classics, futuristic sci-fi, poetry that moves you, or gripping contemporary novels, you'll find your tribe here.
           </p>
         </TextBlock>
         <ImageBlock>
           <Image src="/index-images/a_cat_reading_book_with_colorful_background_2tphl0ksvxsuh6russn9_1.png" alt="Founder" width={300} height={200} />
         </ImageBlock>
         <TextBlock>
-          <h2>We empower small business owners</h2>
+          <h2>The name "Chitchime" is a little nod to those warm</h2>
           <p>
-            Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+            casual conversations you have with friends—like a cozy chat over coffee or at a garden party. But it's also about the "chime" of listening closely, tuning in, and truly hearing each other's perspectives. This is what makes Chitchime special: it's a place for connection, a place where every voice matters, and a place where you can grow through the power of books.
           </p>
           <blockquote>
-            "Making an impact, together" - Socioly Founder
+            So, come join us!
           </blockquote>
         </TextBlock>
       </NewSection>

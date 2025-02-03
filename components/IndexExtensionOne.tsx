@@ -335,40 +335,40 @@ export default function SpotlightSection() {
     <SpotlightWrapper>
       <CardGrid>
         <Card>
-          <Image src="/index-images/square-1.png" alt="Evil Dino" width={500} height={500} />
+          <Image src="/index-images/square-1.png" alt="Genre-Specific Book Clubs" width={500} height={500} />
           <div className="text-wrapper">
-            <h3>Evil Dino</h3>
-            <p>A ferocious dinosaur ready to take on the world!</p>
+            <h3>Niche Book Clubs</h3>
+            <p>Join focused discussions on your favorite genres.</p>
           </div>
         </Card>
         <Card>
-          <Image src="/index-images/square-6.png" alt="Sweet Monkey" width={500} height={500} />
+          <Image src="/index-images/square-6.png" alt="Global Connections" width={500} height={500} />
           <div className="text-wrapper">
-            <h3>Sweet Monkey</h3>
-            <p>A cheerful monkey spreading joy and laughter.</p>
+            <h3>Global Connections</h3>
+            <p>Connect with readers from around the world.</p>
           </div>
         </Card>
         <Card>
-          <Image src="/index-images/square-2.png" alt="Bad King Boy" width={500} height={500} />
+          <Image src="/index-images/square-2.png" alt="Interactive Meetings" width={500} height={500} />
           <div className="text-wrapper">
-            <h3>Bad King Boy</h3>
-            <p>A mischievous character ruling with charm and wit.</p>
+            <h3>Interactive Meetings</h3>
+            <p>Improve speaking, expand vocabulary, and think critically.</p>
           </div>
         </Card>
         <Card>
-          <Image src="/index-images/square-9.png" alt="Gin Gang" width={500} height={500} />
+          <Image src="/index-images/square-9.png" alt="Expert-Led Discussions" width={500} height={500} />
           <div className="text-wrapper">
-            <h3>Gin Gang</h3>
-            <p>An adventurous spirit exploring uncharted territories.</p>
+            <h3>Expert Insights</h3>
+            <p>Gain deeper insights through guided discussions.</p>
           </div>
         </Card>
       </CardGrid>
       <DescriptionWrapper>
-        <h2 className="scroll-element">Spotlight. Projects you&apos;ll love</h2>
+        <h2 className="scroll-element">What Our platform offers?</h2>
         <p className="scroll-element">
-          Buy, sell, and discover amazing new collections and creators.
+          Explore, connect, and grow with global book lovers.
         </p>
-        <button className="scroll-element">Explore all Collections</button>
+        <button className="scroll-element">How It Works</button>
       </DescriptionWrapper>
     </SpotlightWrapper>
   );

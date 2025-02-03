@@ -11,3 +11,5 @@ const colors = {
 };
 
 export default colors;
+
+export const cardPrimary = "#242275";
