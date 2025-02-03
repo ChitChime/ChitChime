@@ -389,9 +389,9 @@ const HamburgerMenu = styled.div`
   display: none;
   flex-direction: column;
   cursor: pointer;
-  z-index: 30; /* اطمینان از نمایش بالاتر از منوی پس‌زمینه */
+  z-index: 30; /* Ensure it appears above the background menu */
   margin-right: 40px;
-  position: relative; /* موقعیت‌دهی نسبی */
+  position: relative; /* Relative positioning */
 
   @media (max-width: 768px) {
     display: flex;
@@ -405,19 +405,19 @@ const HamburgerMenu = styled.div`
     transition: 0.4s;
   }
 
-  /* خطوط برای تبدیل به ضربدر */
+  /* Transform lines into a cross when open */
   &.open div:nth-child(1) {
     transform: rotate(45deg) translate(3px, 5px);
-    background-color: ${colors.dividerPrimary}; /* تغییر رنگ در صورت نیاز */
+    background-color: ${colors.dividerPrimary}; /* Change color if needed */
   }
 
   &.open div:nth-child(2) {
     transform: rotate(-45deg) translate(3px, -5px);
-    background-color: #8291E4; /* تغییر رنگ در صورت نیاز */
+    background-color: ${colors.dividerPrimary}; /* Change color if needed */
   }
 
   &.open div:nth-child(3) {
-    opacity: 0; /* خط وسط را مخفی می‌کنیم */
+    opacity: 0; /* Hide the middle line */
   }
 `;
 
@@ -787,16 +787,14 @@ const gridBackgrounds = [
 export default function Home() {
   const [loading, setLoading] = useState(true);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [menuVisible, setMenuVisible] = useState(false); // Add this line
+  const [menuVisible, setMenuVisible] = useState(false);
 
   useEffect(() => {
-    // اگر صفحه از قبل لود شده بود
     if (document.readyState === "complete") {
       setLoading(false);
       return;
     }
 
-    // منتظر رویداد load بمانیم
     const handleLoad = () => {
       setLoading(false);
     };
@@ -809,17 +807,17 @@ export default function Home() {
 
   const toggleMenu = () => {
     if (!menuOpen) {
-      setMenuVisible(true); // نمایش منو قبل از باز کردن
+      setMenuVisible(true);
       setMenuOpen(true);
     } else {
       setMenuOpen(false);
-      setTimeout(() => setMenuVisible(false), 500); // حذف منو بعد از انیمیشن
+      setTimeout(() => setMenuVisible(false), 500);
     }
   };
 
   const closeMenu = () => {
     setMenuOpen(false);
-    setTimeout(() => setMenuVisible(false), 500); // حذف منو بعد از انیمیشن
+    setTimeout(() => setMenuVisible(false), 500);
   };
 
   return (
@@ -829,15 +827,9 @@ export default function Home() {
           rel="stylesheet"
           href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=chevron_right&display=optional"
         />
-        {/* Remove custom font link */}
-        {/* <link
-          href="https://fonts.googleapis.com/css2?family=Kodchasan:wght@300;400;500;600;700&display=swap"
-          rel="stylesheet"
-        /> */}
       </Head>
       <GlobalStyle />
 
-      {/* لودینگ را همیشه رندر می‌کنیم و وضعیت را به‌صورت prop می‌فرستیم */}
       <LoadingComponent loading={loading} />
 
       <Container>
@@ -856,8 +848,8 @@ export default function Home() {
           {menuVisible && (
             <MobileMenu className={menuOpen ? 'open' : ''} onClick={closeMenu}>
               <NavLink href="#">Home</NavLink>
-              <NavLink href="/about-us">About</NavLink> {/* Update link to about-us */}
-              <NavLink href="#">Clubs</NavLink>
+              <NavLink href="/about-us">About</NavLink>
+              <NavLink href="/clubs">Clubs</NavLink>
               <NavLink href="/contact-us">Contact Us</NavLink>
             </MobileMenu>
           )}
@@ -865,8 +857,8 @@ export default function Home() {
             <NavContainer>
               <Nav>
                 <NavLink href="#">Home</NavLink>
-                <NavLink href="/about-us">About</NavLink> {/* Update link to about-us */}
-                <NavLink href="#">Clubs</NavLink>
+                <NavLink href="/about-us">About</NavLink>
+                <NavLink href="/clubs">Clubs</NavLink>
                 <NavLink href="/contact-us">Contact Us</NavLink>
               </Nav>
               <ProfileButton>Dashboard</ProfileButton>
@@ -876,10 +868,9 @@ export default function Home() {
 
         <MainContent>
           <TextContent>
-            <Title>Explore Clubs, Elevate Your Language</Title>
+            <Title>Join Book-talks & Connect globally!</Title>
             <Subtitle>
-              Dive into vibrant communities to learn, practice, and grow with
-              language enthusiasts.
+              A central place for book lovers to connect, share thoughts and conversations.
             </Subtitle>
             <ButtonGroup>
               <StyledButton>
