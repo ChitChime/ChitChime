@@ -97,8 +97,9 @@ const LeftSection = styled.div`
   flex: 0.3;
   background-color: transparent;
   display: flex;
-  justify-content: center;
-  align-items: flex-start;
+  flex-direction: column; /* تنظیم جهت به صورت ستونی تا لوگو بالا و آیکن‌ها پایین قرار گیرند */
+  justify-content: flex-start;
+  align-items: center; /* مرکز کردن محتوا به صورت افقی */
   padding-top: 20px;
 `;
 
@@ -107,11 +108,19 @@ const MiddleSection = styled.div`
   background-color: #d0d0d0;
   padding: 20px;
   overflow-y: auto; /* اضافه کردن اسکرول به دیو وسطی */
+  /* مخفی کردن اسکرول بار */
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  scrollbar-width: none; /* برای Firefox */
 `;
 
 const RightSection = styled.div`
   flex: 1;
   background-color: #b0b0b0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
 `;
 
 const Title = styled.h1`
@@ -347,12 +356,36 @@ const InfoCard = styled(AnimatedElement)`
   }
 `;
 
-const IconWrapper = styled.span`
-  font-size: 2.5rem;
-  color: ${colors.text};
-  font-family: "Material Icons";
+const IconWrapper = styled.button<{ selected?: boolean }>`
+  font-size: 2rem;
+  color: #000; // رنگ مشکی در حالت پیش‌فرض
+  font-family: "Material Symbols Outlined";
+  background-color: transparent; // پس‌زمینه شفاف در حالت پیش‌فرض
+  border: none; // حذف بوردر در حالت پیش‌فرض
+  border-radius: 50%; // دایره‌ای کردن در حالت هاور یا کلیک
+  padding: 7px 10px; /* از بالا و پایین 7px و چپ و راست 10px */
+  margin: 0;
+  transition: all 0.2s ease-in-out;
+  opacity: 1; // اوپاسیتی 100% در همه حالت‌ها
+
+  &:hover {
+    ${({ selected }) =>
+      !selected &&
+      `
+      background-color: #c0c0c0; // پس‌زمینه طوسی در حالت هاور
+      color: #000; // رنگ مشکی در حالت هاور
+    `}
+  }
+
+  ${({ selected }) =>
+    selected &&
+    `
+    background-color: #000; // پس‌زمینه مشکی در حالت کلیک
+    color: #fff; // رنگ سفید در حالت کلیک
+  `}
+
   @media (max-width: 600px) {
-    font-size: 2rem;
+    font-size: 1.8rem;
   }
 `;
 
@@ -428,7 +461,10 @@ const ImageBlock = styled.div`
 `;
 
 const RectangularDiv = styled.div`
-  background-color: #fff; /* رنگ پس‌زمینه سفید */
+  background-color: #fff; /* fallback background */
+  background-image: url('/index-images/Background.png'); /* اضافه کردن عکس به عنوان پس‌زمینه */
+  background-size: cover; /* پوشش کامل کادر */
+  background-position: center; /* قرارگیری مرکزی عکس */
   border-radius: 10px;
   padding: 20px;
   margin-top: 20px;
@@ -618,27 +654,171 @@ const BoxContainer = styled.div`
 
 // اضافه کردن کامپوننت جدید برای دیو وسط با رنگ آبی
 const BlueCenterDiv = styled.div`
-  background-color: blue;  /* رنگ پس‌زمینه آبی */
-  width: 80%;            /* تنظیم عرض */
-  height: 50px;          /* ارتفاع دیو */
+  background-color: rgba(255, 255, 255, 0.5);  /* رنگ پس‌زمینه سفید با شفافیت 50% بدون اعمال بر نوشته‌ها */
+  width: 70%;
+  height: 80px;
   position: absolute;
-  top: 50%;
+  bottom: 20px;
   left: 50%;
-  transform: translate(-50%, -50%);
-  display: flex;         /* استفاده از flexbox برای مرکز کردن محتوا */
+  transform: translateX(-50%);
+  display: flex;
   justify-content: center;
   align-items: center;
-  color: white;          /* رنگ متن */
+  color: white;
   font-weight: bold;
-  font-size: 1rem;       /* اندازه فونت مورد نظر */
-  gap: 10px;             /* فاصله بین متون */
-  border-radius: 5px;     /* برد ردیوس ۵ پیکسل */
+  font-size: 1.3rem;
+  gap: 10px;
+  border-radius: 5px;
+  padding: 2px;             /* کاهش پدینگ داخل دیو */
+  backdrop-filter: blur(5px); /* اعمال افکت بلور به پس‌زمینه */
+`;
+
+// کامپوننت Countdown برای نمایش شمارش معکوس
+function Countdown({ initialSeconds = 300 }: { initialSeconds?: number }) {
+  const [seconds, setSeconds] = useState(initialSeconds);
+  
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setSeconds(prev => (prev > 0 ? prev - 1 : 0));
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  const formatTime = (secs: number) => {
+    const hours = String(Math.floor(secs / 3600)).padStart(2, "0");
+    const minutes = String(Math.floor((secs % 3600) / 60)).padStart(2, "0");
+    const seconds = String(secs % 60).padStart(2, "0");
+    return `${hours}:${minutes}:${seconds}`;
+  };
+
+  return <>{formatTime(seconds)}</>;
+}
+
+// اضافه کردن کامپوننت برای container آیکون‌ها
+const IconContainer = styled.div`
+  background-color: #fff; /* رنگ پس‌زمینه سفید */
+  padding: 10px;
+  border-radius: 5px;
+  flex: 1; /* استفاده از فضای باقی‌مانده کل بخش (کل صفحه) */
+  display: flex;
+  flex-direction: column; /* قرار دادن آیکون‌ها به صورت عمودی */
+  justify-content: center;
+  align-items: center;
+  gap: 30px; /* افزایش فاصله بین آیکون‌ها */
+`;
+
+const floatAnimation = keyframes`
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+`;
+
+const CircleWrapper = styled.div`
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 15px;
+`;
+
+const ProfileCircle = styled.div`
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  overflow: hidden;
+  background-color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const ProfileName = styled.h2`
+  font-size: 1.2rem;
+  color: #333;
+`;
+
+const FloatingCircle = styled.div`
+  position: absolute;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.6);
+  animation: ${floatAnimation} 3s infinite ease-in-out;
+`;
+
+const Circle1 = styled(FloatingCircle)`
+  width: 15px;
+  height: 15px;
+  top: 15%;
+  left: 5%;
+  animation-delay: 0s;
+`;
+
+const Circle2 = styled(FloatingCircle)`
+  width: 25px;
+  height: 25px;
+  top: 60%;
+  right: 15%;
+  animation-delay: 1s;
+`;
+
+const Circle3 = styled(FloatingCircle)`
+  width: 40px;
+  height: 40px;
+  bottom: 10%;
+  left: 30%;
+  animation-delay: 2s;
+`;
+
+const ProfileContainer = styled.div`
+  width: 80%;
+  height: 50%;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  padding: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  margin-top: 20px;
+`;
+
+const ProfileBorder = styled.div`
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  border: 4px solid white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const ProfileDetails = styled.div`
+  text-align: center;
+  color: white;
+`;
+
+const ProfileJob = styled.p`
+  font-size: 1rem;
+  color: #ddd;
+  margin: 5px 0 0;
 `;
 
 export default function Dashboard() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [loading, setLoading] = useState(true);
   const [menuVisible, setMenuVisible] = useState(false);
+  const [selectedIcon, setSelectedIcon] = useState<string | null>(null);
 
   useEffect(() => {
     if (document.readyState === "complete") {
@@ -693,6 +873,7 @@ export default function Dashboard() {
     <>
       <Head>
         <title>Dashboard</title>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
       </Head>
       <GlobalStyle />
       <LoadingComponent loading={loading} />
@@ -701,6 +882,32 @@ export default function Dashboard() {
           <LogoButton>
             <Image src="/assets/ChitChime-Logo.webp" alt="Chit-Chime Logo" width={70} height={49} />
           </LogoButton>
+          <IconContainer>
+            <IconWrapper
+              selected={selectedIcon === "home"}
+              onClick={() => setSelectedIcon("home")}
+            >
+              home
+            </IconWrapper>
+            <IconWrapper
+              selected={selectedIcon === "search"}
+              onClick={() => setSelectedIcon("search")}
+            >
+              search
+            </IconWrapper>
+            <IconWrapper
+              selected={selectedIcon === "star_rate"}
+              onClick={() => setSelectedIcon("star_rate")}
+            >
+              star_rate
+            </IconWrapper>
+            <IconWrapper
+              selected={selectedIcon === "settings"}
+              onClick={() => setSelectedIcon("settings")}
+            >
+              settings
+            </IconWrapper>
+          </IconContainer>
         </LeftSection>
         <MiddleSection>
           <h1 style={{ fontSize: '2.5rem' }}>Dashboard</h1>
@@ -719,51 +926,87 @@ export default function Dashboard() {
             </div>
           </ButtonGroup>
           <CardContainer>
-            {[...Array(6)].map((_, index) => (
-              <Card key={index}>
-                <CardContent>
-                  <CardSection>
-                    <InnerRectangle>
-                      <InnerImage
-                        src="/index-images/Background.png"
-                        alt="Background"
-                        layout="fill"
-                      />
-                      <BlueCenterDiv>
-                        <div style={{ width: "100%", textAlign: "center" }}>price:</div>
-                        <div style={{ width: "100%", textAlign: "center" }}>starting in:</div>
-                      </BlueCenterDiv>
-                      <InnerContent>
-                        {/* Removed texts */}
-                      </InnerContent>
-                    </InnerRectangle>
-                  </CardSection>
-                  <CardSection>
-                    <h3>Section 2</h3>
-                    <p>Content for section 2 of card {index + 1}.</p>
-                    <BoxContainer>
-                      <BlueBox>
-                        <Image
-                          src="/index-images/a_cat_reading_book_with_colorful_background_8w6w89k8ldm56x4vb2uh_2.png"
-                          alt="A cat reading a book"
-                          width={60}
-                          height={60}
-                          style={{ borderRadius: '50%' }}
+            {[...Array(6)].map((_, index) => {
+              return (
+                <Card key={index}>
+                  <CardContent>
+                    <CardSection>
+                      <InnerRectangle>
+                        <InnerImage
+                          src="/index-images/Background.png"
+                          alt="Background"
+                          layout="fill"
                         />
-                        <NameText>name</NameText>
-                      </BlueBox>
-                      <RedBox>
-                        <RedBoxButton>Click Me</RedBoxButton>
-                      </RedBox>
-                    </BoxContainer>
-                  </CardSection>
-                </CardContent>
-              </Card>
-            ))}
+                        <BlueCenterDiv>
+                          <div style={{ width: "100%", textAlign: "center" }}>
+                            Price:
+                            <div style={{ fontSize: "0.8rem", marginTop: "4px" }}>
+                              200$
+                            </div>
+                          </div>
+                          <div style={{ width: "100%", textAlign: "center" }}>
+                            starting in:
+                            <div style={{ fontSize: "0.8rem", marginTop: "4px" }}>
+                              <Countdown initialSeconds={300} />
+                            </div>
+                          </div>
+                        </BlueCenterDiv>
+                        <InnerContent>
+                          {/* Removed texts */}
+                        </InnerContent>
+                      </InnerRectangle>
+                    </CardSection>
+                    <CardSection>
+                      <h3>Section 2</h3>
+                      <p>Content for section 2 of card {index + 1}.</p>
+                      <BoxContainer>
+                        <BlueBox>
+                          <Image
+                            src="/index-images/a_cat_reading_book_with_colorful_background_8w6w89k8ldm56x4vb2uh_2.png"
+                            alt="A cat reading a book"
+                            width={60}
+                            height={60}
+                            style={{ borderRadius: '50%' }}
+                          />
+                          <NameText>name</NameText>
+                        </BlueBox>
+                        <RedBox>
+                          <RedBoxButton>Click Me</RedBoxButton>
+                        </RedBox>
+                      </BoxContainer>
+                    </CardSection>
+                  </CardContent>
+                </Card>
+              );
+            })}
           </CardContainer>
         </MiddleSection>
-        <RightSection />
+        <RightSection>
+          <ProfileContainer>
+            <CircleWrapper>
+              <Circle1 />
+              <Circle2 />
+              <Circle3 />
+              <ProfileBorder>
+                <ProfileCircle>
+                  <Image 
+                    src="/index-images/a_cat_reading_book_with_colorful_background_6ti23teyit2y4wpvflt3_1.png"
+                    alt="Profile"
+                    width={120}
+                    height={120}
+                  />
+                </ProfileCircle>
+              </ProfileBorder>
+              <ProfileDetails>
+                <ProfileName>John Doe</ProfileName>
+                <ProfileJob>Software Engineer</ProfileJob>
+              </ProfileDetails>
+            </CircleWrapper>
+          </ProfileContainer>
+        </RightSection>
       </MainContainer>
     </>
   );
 }
+
+
