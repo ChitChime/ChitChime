@@ -8,6 +8,7 @@ const colors = {
   dividerSecondary: "#E2A36E", // Secondary divider
   button: "#CE3530", // Button color
   text: "#FDFDFF", // Text color
+  backBlue: "#F8FAFC", // Back Blue
 };
 
 export default colors;

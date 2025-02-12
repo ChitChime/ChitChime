@@ -9,6 +9,7 @@ import IndexExtensionTwo from "../components/IndexExtensionTwo";
 import IndexExtensionThree from "../components/IndexExtensionThree";
 import LoadingComponent from "../components/LoadingComponent"; // ایمپورت کامپوننت لودینگ
 import Image from 'next/image'; // Import Next.js Image component
+import Link from 'next/link';
 
 /* انیمیشن گرادینت برای عنوان */
 const gradientAnimation = keyframes`
@@ -861,7 +862,9 @@ export default function Home() {
                 <NavLink href="/clubs">Clubs</NavLink>
                 <NavLink href="/contact-us">Contact Us</NavLink>
               </Nav>
-              <ProfileButton>Dashboard</ProfileButton>
+              <Link href="/dashboard">
+                <ProfileButton>Dashboard</ProfileButton>
+              </Link>
             </NavContainer>
           </NavWrapper>
         </Header>

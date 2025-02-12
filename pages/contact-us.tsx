@@ -7,6 +7,7 @@ import colors from "../styles/colors";
 import Image from "next/image";
 import IndexExtensionThree from "../components/IndexExtensionThree";
 import LoadingComponent from "../components/LoadingComponent";
+import Link from 'next/link';
 
 const GlobalStyle = createGlobalStyle`
   /* Font imports from page.tsx */
@@ -637,7 +638,9 @@ export default function ContactUsHeader() {
               <NavLink href="/clubs">Clubs</NavLink>
               <NavLink href="/contact-us">Contact Us</NavLink>
             </Nav>
-            <ProfileButton>Dashboard</ProfileButton>
+            <Link href="/dashboard">
+              <ProfileButton>Dashboard</ProfileButton>
+            </Link>
           </NavContainer>
         </NavWrapper>
         <HamburgerMenu className={menuOpen ? "open" : ""} onClick={() => setMenuOpen(!menuOpen)}>
@@ -650,7 +653,9 @@ export default function ContactUsHeader() {
           <NavLink href="/about-us">About</NavLink>
           <NavLink href="/clubs">Clubs</NavLink>
           <NavLink href="/contact-us">Contact Us</NavLink>
-          <ProfileButton>Dashboard</ProfileButton>
+          <Link href="/dashboard">
+            <ProfileButton>Dashboard</ProfileButton>
+          </Link>
         </MobileMenu>
       </Header>
       <HeaderSection>

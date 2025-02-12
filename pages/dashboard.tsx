@@ -27,7 +27,7 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;
     padding: 0;
     font-family: 'Kodchasan', sans-serif;
-    background-color: ${colors.text}; /* تغییر رنگ پس‌زمینه به text */
+    background-color: #FDFDFF; /* تغییر رنگ پس‌زمینه به #F7F9FB */
     color: ${colors.backgroundTop};
   }
 `;
@@ -105,7 +105,7 @@ const LeftSection = styled.div`
 
 const MiddleSection = styled.div`
   flex: 3;
-  background-color: #d0d0d0;
+  background-color: transparent;
   padding: 20px;
   overflow-y: auto; /* اضافه کردن اسکرول به دیو وسطی */
   /* مخفی کردن اسکرول بار */
@@ -117,9 +117,10 @@ const MiddleSection = styled.div`
 
 const RightSection = styled.div`
   flex: 1;
-  background-color: #b0b0b0;
+  background-color: transparent;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: flex-start;
   align-items: flex-start;
 `;
 
@@ -358,30 +359,30 @@ const InfoCard = styled(AnimatedElement)`
 
 const IconWrapper = styled.button<{ selected?: boolean }>`
   font-size: 2rem;
-  color: #000; // رنگ مشکی در حالت پیش‌فرض
+  color: ${colors.backgroundBottom};
   font-family: "Material Symbols Outlined";
-  background-color: transparent; // پس‌زمینه شفاف در حالت پیش‌فرض
-  border: none; // حذف بوردر در حالت پیش‌فرض
-  border-radius: 50%; // دایره‌ای کردن در حالت هاور یا کلیک
-  padding: 7px 10px; /* از بالا و پایین 7px و چپ و راست 10px */
+  background-color: transparent;
+  border: none;
+  border-radius: 50%;
+  padding: 7px 10px;
   margin: 0;
   transition: all 0.2s ease-in-out;
-  opacity: 1; // اوپاسیتی 100% در همه حالت‌ها
+  opacity: 1;
 
   &:hover {
     ${({ selected }) =>
       !selected &&
       `
-      background-color: #c0c0c0; // پس‌زمینه طوسی در حالت هاور
-      color: #000; // رنگ مشکی در حالت هاور
+      background-color: ${colors.dividerPrimary};
+      color: ${colors.backgroundBottom};
     `}
   }
 
   ${({ selected }) =>
     selected &&
     `
-    background-color: #000; // پس‌زمینه مشکی در حالت کلیک
-    color: #fff; // رنگ سفید در حالت کلیک
+    background-color: ${colors.backgroundBottom};
+    color: ${colors.text};
   `}
 
   @media (max-width: 600px) {
@@ -483,14 +484,17 @@ const RectangularDiv = styled.div`
 const ButtonGroup = styled.div`
   display: flex;
   justify-content: space-between;
+  align-items: center;
   width: 100%;
   margin-top: 20px;
 `;
 
-const TextLeft = styled.div`
+const TextLeft = styled.h2`
   flex: 1;
   text-align: left;
-  font-size: 1rem;
+  font-size: 1.5rem;
+  margin-top: 0;
+  margin-bottom: 0;
 `;
 
 const Button = styled.button`
@@ -505,7 +509,7 @@ const Button = styled.button`
 `;
 
 const ExploreButton = styled.button`
-  background-color: #fuchsia;
+  background-color: ${colors.backgroundBottom};
   color: #fff;
   padding: 10px 20px;
   border: none;
@@ -513,8 +517,10 @@ const ExploreButton = styled.button`
   cursor: pointer;
   margin-top: 10px;
   font-weight: bold;
+  transition: background-color 0.3s ease;
+
   &:hover {
-    background-color: #d700d7;
+    background-color: ${colors.dividerPrimary};
   }
 `;
 
@@ -528,7 +534,7 @@ const CardContainer = styled.div`
 
 const Card = styled.div`
   flex: 1 1 calc(33.333% - 0px); /* افزایش عرض کارت‌ها */
-  background-color: #fff;
+  background-color: ${colors.backBlue};
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   display: flex;
@@ -551,15 +557,14 @@ const CardSection = styled.div`
   text-align: center;
   width: 100%; /* اطمینان از اینکه بخش کل عرض را می‌گیرد */
   &:first-child {
-    height: 200px; /* افزایش ارتفاع برای بخش اول کارت */
-    position: relative; /* اضافه کردن position relative برای قرارگیری مطلق */
+    /* ارتفاع ثابت حذف شده تا با ابعاد عکس تنظیم شود */
+    position: relative;
   }
   &:last-child {
     text-align: left; /* تنظیم متن بخش دوم به سمت چپ */
     h3 {
       margin: 10px; /* اعمال مارجین ۱۰ پیکسلی */
       padding-left: 10px; /* اضافه کردن پدینگ چپ ۱۰ پیکسلی */
-      padding-top: 15px; /* اضافه کردن پدینگ بالا ۱۵ پیکسلی فقط برای عنوان */
     }
     p {
       margin: 10px; /* اعمال مارجین ۱۰ پیکسلی */
@@ -572,7 +577,7 @@ const CardSection = styled.div`
 const InnerRectangle = styled.div`
   background-color: #e0e0e0; /* رنگ پس‌زمینه مستطیل */
   width: 100%; /* تنظیم عرض مستطیل به اندازه کل بخش */
-  height: 100%; /* تنظیم ارتفاع مستطیل به اندازه کل بخش */
+  height: 100%; /* ناحیه به اندازه والد (200px) تنظیم شود */
   display: flex; /* استفاده از flexbox برای چپ و راست کردن محتوا */
   justify-content: space-between; /* فاصله بین محتوا */
   align-items: center; /* مرکز کردن محتوا به صورت عمودی */
@@ -583,12 +588,9 @@ const InnerRectangle = styled.div`
 `;
 
 const InnerImage = styled(Image)`
-  position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   z-index: 0; /* قرار دادن تصویر در پس‌زمینه */
   opacity: 1; /* حذف شفافیت برای وضوح تصویر */
 `;
@@ -607,7 +609,7 @@ const BlueBox = styled.div`
   background-color: transparent;
   width: 48%; /* تنظیم عرض برای قرارگیری در کنار هم */
   height: 50px;
-  margin-top: 10px;
+  margin-top: 5px;
   display: flex; /* استفاده از flexbox برای قرار دادن تصویر و متن */
   align-items: center; /* مرکز کردن محتوا به صورت عمودی */
   padding: 5px 20px 20px 20px;
@@ -624,7 +626,7 @@ const RedBox = styled.div`
   background-color: transparent;
   width: 48%; /* تنظیم عرض برای قرارگیری در کنار هم */
   height: 50px;
-  margin-top: 10px;
+  margin-top: 5px;
   display: flex; /* استفاده از flexbox برای قرار دادن دکمه */
   align-items: center; /* مرکز کردن محتوا به صورت عمودی */
   justify-content: center; /* مرکز کردن محتوا به صورت افقی */
@@ -632,16 +634,18 @@ const RedBox = styled.div`
 `;
 
 const RedBoxButton = styled.button`
-  background-color: #242275;
+  background-color: ${colors.backgroundBottom};
   color: white;
   border: none;
   border-radius: 5px;
-  padding: 15px;
+  padding: 12px;
   width: 100%;
   cursor: pointer;
-  font-size: 1.1rem; /* کمی کوچکتر کردن متن داخل دکمه */
+  font-size: 1.1rem;
+  transition: background-color 0.3s ease;
+
   &:hover {
-    background-color: #f0f0f0;
+    background-color: ${colors.dividerPrimary};
   }
 `;
 
@@ -653,8 +657,8 @@ const BoxContainer = styled.div`
 `;
 
 // اضافه کردن کامپوننت جدید برای دیو وسط با رنگ آبی
-const BlueCenterDiv = styled.div`
-  background-color: rgba(255, 255, 255, 0.5);  /* رنگ پس‌زمینه سفید با شفافیت 50% بدون اعمال بر نوشته‌ها */
+const BlueCenterDivMiddle = styled.div`
+  background-color: rgba(255, 255, 255, 0.5);
   width: 70%;
   height: 80px;
   position: absolute;
@@ -669,8 +673,14 @@ const BlueCenterDiv = styled.div`
   font-size: 1.3rem;
   gap: 10px;
   border-radius: 5px;
-  padding: 2px;             /* کاهش پدینگ داخل دیو */
-  backdrop-filter: blur(5px); /* اعمال افکت بلور به پس‌زمینه */
+  padding: 2px;
+  backdrop-filter: blur(5px);
+`;
+
+// اضافه کردن کامپوننت جدید برای دیو سمت راست با رنگ آبی
+const BlueCenterDivRight = styled(BlueCenterDivMiddle)`
+  font-size: 1rem;
+  height: 25%;
 `;
 
 // کامپوننت Countdown برای نمایش شمارش معکوس
@@ -728,12 +738,11 @@ const CircleWrapper = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  gap: 15px;
 `;
 
 const ProfileCircle = styled.div`
-  width: 120px;
-  height: 120px;
+  width: 90px;
+  height: 90px;
   border-radius: 50%;
   overflow: hidden;
   background-color: #fff;
@@ -743,8 +752,10 @@ const ProfileCircle = styled.div`
 `;
 
 const ProfileName = styled.h2`
-  font-size: 1.2rem;
-  color: #333;
+  font-size: 1.1rem;
+  margin-top: 8px;
+  margin-bottom: 2px;
+  color: ${colors.text};
 `;
 
 const FloatingCircle = styled.div`
@@ -757,31 +768,31 @@ const FloatingCircle = styled.div`
 const Circle1 = styled(FloatingCircle)`
   width: 15px;
   height: 15px;
-  top: 15%;
+  bottom: 35%;
   left: 5%;
   animation-delay: 0s;
 `;
 
 const Circle2 = styled(FloatingCircle)`
-  width: 25px;
-  height: 25px;
-  top: 60%;
-  right: 15%;
+  width: 20px;
+  height: 20px;
+  top: 5px;
+  right: 12px;
   animation-delay: 1s;
 `;
 
 const Circle3 = styled(FloatingCircle)`
-  width: 40px;
-  height: 40px;
-  bottom: 10%;
-  left: 30%;
+  width: 25px;
+  height: 25px;
+  bottom: 20%;
+  right: 5px;
   animation-delay: 2s;
 `;
 
 const ProfileContainer = styled.div`
   width: 80%;
-  height: 50%;
-  background-color: rgba(255, 255, 255, 0.1);
+  height: 25%;
+  background-color: ${colors.backgroundBottom};
   border-radius: 20px;
   display: flex;
   flex-direction: column;
@@ -790,12 +801,13 @@ const ProfileContainer = styled.div`
   position: relative;
   padding: 20px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  margin-top: 20px;
+  margin: 20px auto;
 `;
 
 const ProfileBorder = styled.div`
-  width: 140px;
-  height: 140px;
+  width: 100px;
+  height: 100px;
+  padding: 5px 0;
   border-radius: 50%;
   border: 4px solid white;
   display: flex;
@@ -809,16 +821,83 @@ const ProfileDetails = styled.div`
 `;
 
 const ProfileJob = styled.p`
-  font-size: 1rem;
-  color: #ddd;
-  margin: 5px 0 0;
+  font-size: 0.9rem;
+  color: ${colors.dividerPrimary};
+  margin: 0;
+`;
+
+const RegisteredClubsSection = styled.div`
+  width: 100%;
+  margin-top: 0px;
+`;
+
+const RegisteredClubsTitle = styled.h2`
+  margin: 0;
+  padding: 10px;
+  font-size: 1.5rem;
+  color: ${colors.backgroundTop};
+`;
+
+const RegisteredClubsScroll = styled.div`
+  max-height: 320px;  /* تغییر ارتفاع حداکثر به 320 پیکسل */
+  overflow-y: auto;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+  &::-webkit-scrollbar {
+    width: 0;  /* مخفی کردن اسکرول بار در مرورگرهای WebKit */
+  }
+`;
+
+// افزودن کامپوننت‌های جدید برای کارت‌های سمت راست
+const RightCard = styled.div`
+  background-color: ${colors.backBlue};
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  min-width: 240px;
+  margin-bottom: 20px;
+`;
+
+const RightCardContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+`;
+
+const RightCardSection = styled.div`
+  padding: 0;
+  margin: 0;
+  text-align: center;
+  width: 100%;
+  &:first-child {
+    position: relative;
+  }
+  &:last-child {
+    text-align: left;
+    h3 {
+      margin: 10px;
+      padding-left: 10px;
+    }
+    p {
+      margin: 10px;
+      padding-left: 10px;
+      padding-bottom: 15px;
+    }
+  }
 `;
 
 export default function Dashboard() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [loading, setLoading] = useState(true);
   const [menuVisible, setMenuVisible] = useState(false);
-  const [selectedIcon, setSelectedIcon] = useState<string | null>(null);
+  const [selectedIcon, setSelectedIcon] = useState<string>("home");
 
   useEffect(() => {
     if (document.readyState === "complete") {
@@ -880,7 +959,7 @@ export default function Dashboard() {
       <MainContainer>
         <LeftSection>
           <LogoButton>
-            <Image src="/assets/ChitChime-Logo.webp" alt="Chit-Chime Logo" width={70} height={49} />
+            <Image src="/assets/ChitChime-Logo-2.webp" alt="Chit-Chime Logo" width={70} height={49} />
           </LogoButton>
           <IconContainer>
             <IconWrapper
@@ -910,14 +989,14 @@ export default function Dashboard() {
           </IconContainer>
         </LeftSection>
         <MiddleSection>
-          <h1 style={{ fontSize: '2.5rem' }}>Dashboard</h1>
+          <h1 style={{ fontSize: '2.5rem', marginTop: '10px', marginBottom: '5px' }}>Dashboard</h1>
           <p>Buy and sell digital artwork, NFT collection</p>
           <RectangularDiv>
             <h2>Find a collection of best artwork here</h2>
             <ExploreButton>Explore Now</ExploreButton>
           </RectangularDiv>
           <ButtonGroup>
-            <TextLeft>all clubs</TextLeft>
+            <TextLeft>All Clubs</TextLeft>
             <div>
               <Button>Button 1</Button>
               <Button>Button 2</Button>
@@ -935,22 +1014,32 @@ export default function Dashboard() {
                         <InnerImage
                           src="/index-images/Background.png"
                           alt="Background"
-                          layout="fill"
+                          layout="responsive"
+                          width={300}
+                          height={200}
+                          objectFit="contain"
                         />
-                        <BlueCenterDiv>
+                        <BlueCenterDivMiddle>
                           <div style={{ width: "100%", textAlign: "center" }}>
                             Price:
                             <div style={{ fontSize: "0.8rem", marginTop: "4px" }}>
                               200$
                             </div>
                           </div>
-                          <div style={{ width: "100%", textAlign: "center" }}>
-                            starting in:
-                            <div style={{ fontSize: "0.8rem", marginTop: "4px" }}>
+                          <div style={{ 
+                            width: "100%", 
+                            textAlign: "center", 
+                            display: "flex", 
+                            justifyContent: "center", 
+                            alignItems: "center", 
+                            flexDirection: "column"
+                          }}>
+                            <span style={{ fontSize: "1.3rem" }}>Opening:</span>
+                            <span style={{ fontSize: "0.8rem", marginTop: "4px" }}>
                               <Countdown initialSeconds={300} />
-                            </div>
+                            </span>
                           </div>
-                        </BlueCenterDiv>
+                        </BlueCenterDivMiddle>
                         <InnerContent>
                           {/* Removed texts */}
                         </InnerContent>
@@ -1003,10 +1092,102 @@ export default function Dashboard() {
               </ProfileDetails>
             </CircleWrapper>
           </ProfileContainer>
+          <RegisteredClubsSection>
+            <RegisteredClubsTitle>Registered Clubs</RegisteredClubsTitle>
+            <RegisteredClubsScroll>
+              <RightCard>
+                <RightCardContent>
+                  <RightCardSection>
+                    <InnerRectangle>
+                      <InnerImage
+                        src="/index-images/Background.png"
+                        alt="Background"
+                        layout="responsive"
+                        width={300}
+                        height={200}
+                        objectFit="contain"
+                      />
+                      <BlueCenterDivRight>
+                        <div style={{ width: "100%", textAlign: "center", display: "flex", justifyContent: "center", alignItems: "center", fontSize: "1rem" }}>
+                          Opening: <Countdown initialSeconds={300} />
+                        </div>
+                      </BlueCenterDivRight>
+                      <InnerContent>
+                        {/* Removed texts */}
+                      </InnerContent>
+                    </InnerRectangle>
+                  </RightCardSection>
+                  <RightCardSection>
+                    <h3>Section 2</h3>
+                    <p style={{ display: "none" }}>Content for section 2 of card 1.</p>
+                    <BoxContainer>
+                      <BlueBox style={{ marginTop: "5px" }}>
+                        <Image
+                          src="/index-images/a_cat_reading_book_with_colorful_background_8w6w89k8ldm56x4vb2uh_2.png"
+                          alt="A cat reading a book"
+                          width={40}
+                          height={40}
+                          style={{ borderRadius: "50%" }}
+                        />
+                        <NameText style={{ fontSize: "1rem", marginLeft: "7px" }}>name</NameText>
+                      </BlueBox>
+                      <RedBox style={{ marginTop: "5px" }}>
+                        <RedBoxButton style={{ width: "80%", padding: "12px" }}>Join</RedBoxButton>
+                      </RedBox>
+                    </BoxContainer>
+                  </RightCardSection>
+                </RightCardContent>
+              </RightCard>
+              <RightCard>
+                <RightCardContent>
+                  <RightCardSection>
+                    <InnerRectangle>
+                      <InnerImage
+                        src="/index-images/Background.png"
+                        alt="Background"
+                        layout="responsive"
+                        width={300}
+                        height={200}
+                        objectFit="contain"
+                      />
+                      <BlueCenterDivRight>
+                        <div style={{ width: "100%", textAlign: "center", display: "flex", justifyContent: "center", alignItems: "center", fontSize: "1rem" }}>
+                          Opening: <Countdown initialSeconds={300} />
+                        </div>
+                      </BlueCenterDivRight>
+                      <InnerContent>
+                        {/* Removed texts */}
+                      </InnerContent>
+                    </InnerRectangle>
+                  </RightCardSection>
+                  <RightCardSection>
+                    <h3>Section 2</h3>
+                    <p style={{ display: "none" }}>Content for section 2 of card 2.</p>
+                    <BoxContainer>
+                      <BlueBox>
+                        <Image
+                          src="/index-images/a_cat_reading_book_with_colorful_background_8w6w89k8ldm56x4vb2uh_2.png"
+                          alt="A cat reading a book"
+                          width={40}
+                          height={40}
+                          style={{ borderRadius: "50%" }}
+                        />
+                        <NameText>name</NameText>
+                      </BlueBox>
+                      <RedBox>
+                        <RedBoxButton>Join</RedBoxButton>
+                      </RedBox>
+                    </BoxContainer>
+                  </RightCardSection>
+                </RightCardContent>
+              </RightCard>
+            </RegisteredClubsScroll>
+          </RegisteredClubsSection>
         </RightSection>
       </MainContainer>
     </>
   );
 }
+
 
 
